@@ -14,9 +14,7 @@ class HomeScreen extends StatelessWidget {
       ),
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HomeAppbar()
-        ],
+        children: [HomeAppbar()],
       ),
     );
   }

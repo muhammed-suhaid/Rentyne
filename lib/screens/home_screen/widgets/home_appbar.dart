@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:rentyne/screens/home_screen/widgets/home_search_bar.dart';
 
 class HomeAppbar extends StatelessWidget {
   const HomeAppbar({
@@ -19,7 +20,7 @@ class HomeAppbar extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color:  Colors.grey[500],
+                      color: Colors.grey[500],
                     ),
               ),
               const Spacer(),
@@ -44,6 +45,7 @@ class HomeAppbar extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
+        const HomeSearchBar()
       ],
     );
   }
