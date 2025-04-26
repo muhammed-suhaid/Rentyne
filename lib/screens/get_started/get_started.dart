@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentyne/data/get_satarted_data.dart';
+import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/screens/components/tabs.dart';
 
 class GetStartedScreen extends StatefulWidget {
@@ -141,7 +142,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   height: _currentPage == index ? 20 : 8,
                   decoration: BoxDecoration(
                     color: _currentPage == index
-                        ? const Color.fromARGB(255, 167, 251, 1)
+                        ? ColorManager.secondary
                         : Colors.white54,
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -174,7 +175,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 167, 251, 1),
+                      color: ColorManager.secondary,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     alignment: Alignment.center,

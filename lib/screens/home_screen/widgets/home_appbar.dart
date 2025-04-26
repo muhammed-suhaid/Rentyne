@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/screens/home_screen/widgets/home_search_bar.dart';
 
 class HomeAppbar extends StatelessWidget {
@@ -21,7 +22,7 @@ class HomeAppbar extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey[500],
+                      color: ColorManager.tertiary,
                     ),
               ),
               const Spacer(),
@@ -39,7 +40,7 @@ class HomeAppbar extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  backgroundColor: Colors.grey[500],
+                  backgroundColor: ColorManager.primary,
                   fixedSize: const Size(50, 50),
                 ),
               ),

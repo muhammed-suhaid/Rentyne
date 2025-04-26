@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentyne/screens/home_screen/widgets/home_appbar.dart';
+import 'package:rentyne/screens/home_screen/widgets/home_categories.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,6 +17,7 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HomeAppbar(),
+          HomeCategories(),
         ],
       ),
     );

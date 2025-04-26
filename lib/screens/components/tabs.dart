@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/screens/home_screen/home_screen.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -38,8 +39,8 @@ class _TabsScreenState extends State<TabsScreen> {
         onTap: _selectPage,
         currentIndex: _selectedPageindex,
         backgroundColor: Colors.black,
-        selectedItemColor: const Color.fromARGB(255, 167, 251, 1),
-        unselectedItemColor: Colors.grey[500],
+        selectedItemColor: ColorManager.secondary,
+        unselectedItemColor: ColorManager.primary,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Iconsax.home5),

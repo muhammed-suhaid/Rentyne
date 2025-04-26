@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:rentyne/resources/color_manager.dart';
 
 class HomeSearchBar extends StatefulWidget {
   const HomeSearchBar({super.key});
@@ -64,7 +65,7 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.only(left: 16, right: 8),
       decoration: BoxDecoration(
-        color: Colors.grey[500],
+        color: ColorManager.primary,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
@@ -102,7 +103,7 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
                 //************************* Text form field *************************//
                 TextFormField(
                   controller: searchController,
-                  cursorColor: const Color.fromARGB(255, 167, 251, 1),
+                  cursorColor: ColorManager.secondary,
                   onChanged: onSearchChanged,
                   style: const TextStyle(color: Colors.black),
                   decoration: InputDecoration(
