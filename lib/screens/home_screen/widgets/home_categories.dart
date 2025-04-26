@@ -27,6 +27,7 @@ class _HomeCategoriesState extends State<HomeCategories> {
             horizontal: 16,
             vertical: 10,
           ),
+          //************************* Title *************************//
           child: Text(
             "Top Brands",
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -41,11 +42,13 @@ class _HomeCategoriesState extends State<HomeCategories> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SizedBox(
             height: 40,
+            //************************* List view fort Category container *************************//
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: category.length,
               itemBuilder: (context, index) {
+                //************************* Category container *************************//
                 return InkWell(
                   splashColor: Colors.transparent,
                   onTap: () {
@@ -76,6 +79,7 @@ class _HomeCategoriesState extends State<HomeCategories> {
                   ),
                 );
               },
+              //************************* Separator sizedBox *************************//
               separatorBuilder: (context, index) => const SizedBox(width: 10),
             ),
           ),
