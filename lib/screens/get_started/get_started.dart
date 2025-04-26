@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentyne/data/get_satarted_data.dart';
-import 'package:rentyne/screens/home_screen/home_screen.dart';
+import 'package:rentyne/screens/components/tabs.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({super.key});
@@ -27,17 +27,18 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
       } else {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const TabsScreen(),
           ),
         );
       }
     });
   }
+
 //************************* Skip Method *************************//
   void _skip() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const HomeScreen(),
+        builder: (context) => const TabsScreen(),
       ),
     );
   }
@@ -57,7 +58,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
             ),
           ),
 
-          //************************* Page View with smooth fade-in transitionn *************************// 
+          //************************* Page View with smooth fade-in transitionn *************************//
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 700),
             switchInCurve: Curves.easeIn,
@@ -74,7 +75,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                     width: double.infinity,
                     height: double.infinity,
                   ),
-                 //************************* Gradient overlay *************************//
+                  //************************* Gradient overlay *************************//
                   Container(
                     width: double.infinity,
                     height: double.infinity,
@@ -87,7 +88,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                       ),
                     ),
                   ),
-                 //************************* Title and Subtitle *************************//
+                  //************************* Title and Subtitle *************************//
                   Padding(
                     padding: EdgeInsets.fromLTRB(
                       16,
@@ -139,7 +140,9 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   width: 8,
                   height: _currentPage == index ? 20 : 8,
                   decoration: BoxDecoration(
-                    color: _currentPage == index ? const Color.fromARGB(255, 167, 251, 1) : Colors.white54,
+                    color: _currentPage == index
+                        ? const Color.fromARGB(255, 167, 251, 1)
+                        : Colors.white54,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
