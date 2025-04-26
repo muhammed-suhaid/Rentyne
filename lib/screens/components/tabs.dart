@@ -22,12 +22,15 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     Widget activePage = const HomeScreen();
 
+    //************************* Pages selection condition *************************//
     if (_selectedPageindex == 1) {
       activePage = const SizedBox();
     }
     if (_selectedPageindex == 2) {
       activePage = const SizedBox();
     }
+
+    //************************* Body and Icons *************************//
     return Scaffold(
       backgroundColor: Colors.black,
       body: activePage,

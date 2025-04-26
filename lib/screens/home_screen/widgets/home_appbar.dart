@@ -15,6 +15,7 @@ class HomeAppbar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
             children: [
+              //************************* Title *************************//
               Text(
                 "Discover Premium\nCars",
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -24,6 +25,7 @@ class HomeAppbar extends StatelessWidget {
                     ),
               ),
               const Spacer(),
+              //************************* Notification Iconbutton *************************//
               IconButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -45,6 +47,7 @@ class HomeAppbar extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
+        //************************* Search bar *************************//
         const HomeSearchBar()
       ],
     );
