@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentyne/data/get_satarted_data.dart';
+import 'package:rentyne/screens/home_screen/home_screen.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({super.key});
@@ -26,7 +27,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
       } else {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const SizedBox(),
+            builder: (context) => const HomeScreen(),
           ),
         );
       }
@@ -36,7 +37,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
   void _skip() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const SizedBox(),
+        builder: (context) => const HomeScreen(),
       ),
     );
   }
