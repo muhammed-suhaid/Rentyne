@@ -1,21 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
+import 'package:rentyne/screens/home_screen/widgets/home_car_item.dart';
 
 class HomeCategories extends StatefulWidget {
-  const HomeCategories({super.key});
+  const HomeCategories({
+    super.key,
+    required this.availableCars,
+    required this.favouriteCars,
+  });
+  final List<Car> availableCars;
+  final List<Car> favouriteCars;
 
   @override
   State<HomeCategories> createState() => _HomeCategoriesState();
 }
 
 class _HomeCategoriesState extends State<HomeCategories> {
-  int currentCategory = 0;
-  List<String> category = [
+  int currentBrand = 0;
+  List<String> brand = [
     "BMW",
     "Porsche",
     "Benz",
     "Tesla",
   ];
+  List<Car> filteredCars = [];
+
+  List<Car> _categorizedCars(String brand) {
+    return filteredCars =
+        widget.availableCars.where((car) => car.brand.contains(brand)).toList();
+  }
+
+  void onSelectCar(BuildContext context, Car car) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SizedBox(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,35 +64,35 @@ class _HomeCategoriesState extends State<HomeCategories> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SizedBox(
             height: 40,
-            //************************* List view fort Category container *************************//
+            //************************* List view fort Brand container *************************//
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: category.length,
+              itemCount: brand.length,
               itemBuilder: (context, index) {
-                //************************* Category container *************************//
+                //************************* Brand container *************************//
                 return InkWell(
                   splashColor: Colors.transparent,
                   onTap: () {
                     setState(() {
-                      currentCategory = index;
+                      currentBrand = index;
                     });
                   },
                   child: Container(
                     height: 40,
                     width: 100,
                     decoration: BoxDecoration(
-                      color: currentCategory == index
+                      color: currentBrand == index
                           ? ColorManager.secondary
                           : ColorManager.primary,
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: Center(
                       child: Text(
-                        category[index],
+                        brand[index],
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: currentCategory == index
+                              color: currentBrand == index
                                   ? Colors.black
                                   : Colors.black.withOpacity(0.5),
                             ),
@@ -83,6 +105,15 @@ class _HomeCategoriesState extends State<HomeCategories> {
               separatorBuilder: (context, index) => const SizedBox(width: 10),
             ),
           ),
+        ),
+        HomeCarItem(
+          categorizedCars: _categorizedCars(
+            brand[currentBrand],
+          ),
+          onSelectCar: (Car car) {
+            onSelectCar(context, car);
+          },
+          favouriteCars: widget.favouriteCars,
         ),
       ],
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:rentyne/data/car_data.dart';
+import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/screens/home_screen/home_screen.dart';
 
@@ -12,6 +14,7 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedPageindex = 0;
+  List<Car> favouriteCars = [];
 
   void _selectPage(int index) {
     setState(() {
@@ -21,7 +24,11 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget activePage = const HomeScreen();
+    final availableCars = sampleCars;
+    Widget activePage = HomeScreen(
+      availableCars: availableCars,
+      favouriteCars: favouriteCars,
+    );
 
     //************************* Pages selection condition *************************//
     if (_selectedPageindex == 1) {
