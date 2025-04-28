@@ -129,10 +129,9 @@ class _BookingScreenState extends State<BookingScreen> {
             Text(
               'Description',
               style: TextStyle(
-                fontSize: 18,
-                color: ColorManager.tertiary,
-                fontWeight: FontWeight.w400
-              ),
+                  fontSize: 18,
+                  color: ColorManager.tertiary,
+                  fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 5),
             Text(
@@ -140,7 +139,6 @@ class _BookingScreenState extends State<BookingScreen> {
               style: TextStyle(
                 fontSize: 14,
                 color: ColorManager.primary,
-                
               ),
             ),
             const SizedBox(height: 30),

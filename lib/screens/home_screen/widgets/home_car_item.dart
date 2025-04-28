@@ -70,7 +70,7 @@ class _HomeCarItemState extends State<HomeCarItem> {
                                   widget.favouriteCars.add(car);
                                 }
                               });
-                
+
                               ScaffoldMessenger.of(context).clearSnackBars();
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
@@ -82,7 +82,7 @@ class _HomeCarItemState extends State<HomeCarItem> {
                               ));
                             },
                             style: IconButton.styleFrom(
-                              backgroundColor: Colors.white,
+                              backgroundColor: ColorManager.primary,
                               fixedSize: const Size(40, 40),
                             ),
                             icon: AnimatedSwitcher(

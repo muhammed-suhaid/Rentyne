@@ -114,7 +114,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                           const SizedBox(height: 10),
                           Text(
                             pages[_currentPage].subtitle,
-                            style:  TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               color: ColorManager.primary,
                             ),
