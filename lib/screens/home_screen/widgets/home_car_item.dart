@@ -40,6 +40,7 @@ class _HomeCarItemState extends State<HomeCarItem> {
                   onTap: () {
                     widget.onSelectCar(car);
                   },
+                  splashColor: Colors.transparent,
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 20),
                     height: 200,
@@ -69,7 +70,7 @@ class _HomeCarItemState extends State<HomeCarItem> {
                                   widget.favouriteCars.add(car);
                                 }
                               });
-
+                
                               ScaffoldMessenger.of(context).clearSnackBars();
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(

@@ -22,7 +22,7 @@ class HomeAppbar extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: ColorManager.tertiary,
+                      color: ColorManager.secondary,
                     ),
               ),
               const Spacer(),
@@ -40,7 +40,7 @@ class HomeAppbar extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  backgroundColor: ColorManager.primary,
+                  backgroundColor: ColorManager.secondary,
                   fixedSize: const Size(50, 50),
                 ),
               ),

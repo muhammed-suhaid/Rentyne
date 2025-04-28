@@ -108,15 +108,15 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                             style: const TextStyle(
                               fontSize: 36,
                               fontWeight: FontWeight.w500,
-                              color: Colors.white,
+                              color: ColorManager.secondary,
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
                             pages[_currentPage].subtitle,
-                            style: const TextStyle(
+                            style:  TextStyle(
                               fontSize: 16,
-                              color: Colors.white70,
+                              color: ColorManager.primary,
                             ),
                           ),
                         ],

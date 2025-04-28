@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
+import 'package:rentyne/screens/booking_screen/booking_screen.dart';
 
 class CarDetailsScreen extends StatelessWidget {
   const CarDetailsScreen({
@@ -82,7 +83,7 @@ class CarDetailsScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '  ${car.rating}',
+                      car.rating,
                       style: TextStyle(
                         fontSize: 14,
                         color: ColorManager.tertiary,
@@ -188,22 +189,36 @@ class CarDetailsScreen extends StatelessWidget {
                 const SizedBox(width: 10),
                 //************************* Booking button *************************//
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    width: double.infinity,
-                    height: 55,
-                    decoration: BoxDecoration(
-                      color:
-                          car.isAvailable ? ColorManager.secondary : Colors.red,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        car.isAvailable ? "Book Now" : "Not Available",
-                        style: TextStyle(
-                          color: car.isAvailable ? Colors.black : Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                  child: InkWell(
+                    onTap: () {
+                      if (car.isAvailable) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BookingScreen(car: car),
+                          ),
+                        );
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      width: double.infinity,
+                      height: 55,
+                      decoration: BoxDecoration(
+                        color: car.isAvailable
+                            ? ColorManager.secondary
+                            : Colors.red,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          car.isAvailable ? "Book Now" : "Not Available",
+                          style: TextStyle(
+                            color:
+                                car.isAvailable ? Colors.black : Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
