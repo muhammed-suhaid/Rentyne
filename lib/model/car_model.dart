@@ -16,7 +16,7 @@ class Car {
   final String name;
   final String imageUrl;
   final String description;
-  final String isAvailable;
+  final bool isAvailable;
   final String createdAt;
   final String cost;
   final String rating;

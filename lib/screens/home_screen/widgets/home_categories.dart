@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
+import 'package:rentyne/screens/car_detail_screen/car_detail_screen.dart';
 import 'package:rentyne/screens/home_screen/widgets/home_car_item.dart';
 
 class HomeCategories extends StatefulWidget {
@@ -34,7 +35,7 @@ class _HomeCategoriesState extends State<HomeCategories> {
   void onSelectCar(BuildContext context, Car car) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const SizedBox(),
+        builder: (context) => CarDetailsScreen(car: car),
       ),
     );
   }

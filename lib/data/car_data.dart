@@ -8,7 +8,7 @@ final List<Car> sampleCars = [
     name: 'BMW X5',
     imageUrl: ImageAssets.getStarted3,
     description: 'Luxury mid-size SUV with sporty handling and advanced tech.',
-    isAvailable: 'true',
+    isAvailable: true,
     createdAt: '2025-04-27',
     cost: '2000',
     rating: '4.7',
@@ -20,7 +20,7 @@ final List<Car> sampleCars = [
     imageUrl: ImageAssets.getStarted2,
     description:
         'Premium electric sedan offering long range and fast acceleration.',
-    isAvailable: 'true',
+    isAvailable: true,
     createdAt: '2025-04-27',
     cost: '3000',
     rating: '4.5',
@@ -31,7 +31,7 @@ final List<Car> sampleCars = [
     name: 'Porsche 911',
     imageUrl: ImageAssets.getStarted1,
     description: 'Iconic sports car known for performance and timeless design.',
-    isAvailable: 'false',
+    isAvailable: false,
     createdAt: '2025-04-27',
     cost: '2500',
     rating: '4.9',
@@ -43,7 +43,7 @@ final List<Car> sampleCars = [
     imageUrl: ImageAssets.getStarted2,
     description:
         'Executive sedan blending luxury, comfort, and tech innovation.',
-    isAvailable: 'true',
+    isAvailable: true,
     createdAt: '2025-04-27',
     cost: '2000',
     rating: '4.1',
@@ -53,10 +53,11 @@ final List<Car> sampleCars = [
     brand: 'BMW',
     name: 'BMW i8',
     imageUrl: ImageAssets.getStarted3,
-    description: 'Futuristic plug-in hybrid sports car with striking looks.',
-    isAvailable: 'false',
+    description:
+        'The BMW i8 is a revolutionary plug-in hybrid sports car that combines futuristic design with outstanding performance. With its aerodynamic curves, scissor doors, and lightweight carbon-fiber structure, the i8 looks like it’s straight from the future. Powered by a twin-turbocharged engine and an electric motor, it delivers exhilarating speed with impressive efficiency. Step inside to experience a luxurious cabin filled with premium materials, advanced technology, and an eco-friendly spirit. Perfect for those who crave innovation, performance, and unmistakable style on every journey.',
+    isAvailable: false,
     createdAt: '2025-04-27',
     cost: '4000',
     rating: '4.3',
-  ),
+  )
 ];
