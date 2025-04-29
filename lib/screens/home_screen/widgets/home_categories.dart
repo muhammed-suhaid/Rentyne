@@ -19,12 +19,19 @@ class HomeCategories extends StatefulWidget {
 
 class _HomeCategoriesState extends State<HomeCategories> {
   int currentBrand = 0;
-  List<String> brand = [
-    "BMW",
-    "Porsche",
-    "Benz",
-    "Tesla",
+  List<String> carBrands = [
+    'BMW',
+    'Honda',
+    'Lamborghini',
+    'Mazda',
+    'McLaren',
+    'Mitsubishi',
+    'Nissan',
+    'Porsche',
+    'Subaru',
+    'Toyota',
   ];
+
   List<Car> filteredCars = [];
 
   List<Car> _categorizedCars(String brand) {
@@ -69,7 +76,7 @@ class _HomeCategoriesState extends State<HomeCategories> {
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: brand.length,
+              itemCount: carBrands.length,
               itemBuilder: (context, index) {
                 //************************* Brand container *************************//
                 return InkWell(
@@ -90,7 +97,7 @@ class _HomeCategoriesState extends State<HomeCategories> {
                     ),
                     child: Center(
                       child: Text(
-                        brand[index],
+                        carBrands[index],
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.bold,
                               color: currentBrand == index
@@ -109,7 +116,7 @@ class _HomeCategoriesState extends State<HomeCategories> {
         ),
         HomeCarItem(
           categorizedCars: _categorizedCars(
-            brand[currentBrand],
+            carBrands[currentBrand],
           ),
           onSelectCar: (Car car) {
             onSelectCar(context, car);

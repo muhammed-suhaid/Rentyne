@@ -4,6 +4,7 @@ class Car {
     required this.brand,
     required this.name,
     required this.imageUrl,
+    required this.videoUrl,
     required this.description,
     required this.isAvailable,
     required this.createdAt,
@@ -15,6 +16,7 @@ class Car {
   final String brand;
   final String name;
   final String imageUrl;
+  final String videoUrl;
   final String description;
   final bool isAvailable;
   final String createdAt;

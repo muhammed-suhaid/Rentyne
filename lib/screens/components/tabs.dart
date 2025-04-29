@@ -24,7 +24,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final availableCars = sampleCars;
+    final availableCars = carList;
     Widget activePage = HomeScreen(
       availableCars: availableCars,
       favouriteCars: favouriteCars,

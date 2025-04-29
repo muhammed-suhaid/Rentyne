@@ -1,235 +1,169 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/screens/booking_screen/booking_screen.dart';
 
-class CarDetailsScreen extends StatelessWidget {
-  const CarDetailsScreen({
-    super.key,
-    required this.car,
-  });
+class CarDetailsScreen extends StatefulWidget {
+  const CarDetailsScreen({super.key, required this.car});
   final Car car;
+
+  @override
+  State<CarDetailsScreen> createState() => _CarDetailsScreenState();
+}
+
+class _CarDetailsScreenState extends State<CarDetailsScreen> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeVideo();
+  }
+
+  // Initialize the video
+  void _initializeVideo() {
+    _controller =
+        VideoPlayerController.networkUrl(Uri.parse(widget.car.videoUrl))
+          ..initialize().then((_) {
+            setState(() {});
+            _controller.setVolume(0);
+            _controller.play();
+            _controller.setLooping(true);
+          });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              //************************* image *************************//
-              Container(
-                width: double.infinity,
-                height: 350,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
-                  ),
-                ),
-                clipBehavior: Clip.hardEdge,
-                child: Image.asset(
-                  car.imageUrl,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              //************************* Back button *************************//
-              SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 20,
-                  ),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Padding(
-                      padding: EdgeInsets.only(left: 5),
-                      child: Icon(Icons.arrow_back_ios),
-                    ),
-                    style: IconButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      backgroundColor: Colors.grey[300],
-                      fixedSize: const Size(50, 50),
+      body: _controller.value.isInitialized
+          ? Stack(
+              children: [
+                //******************* Video Background *******************//
+                SizedBox.expand(
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: SizedBox(
+                      width: _controller.value.size.width,
+                      height: _controller.value.size.height,
+                      child: VideoPlayer(_controller),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          //************************* Car name text and Rating text *************************//
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 16,
-              horizontal: 20,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  car.name,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: ColorManager.tertiary,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      car.rating,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: ColorManager.tertiary,
-                      ),
+                //******************* Overlay UI *******************//
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 16,
                     ),
-                    Icon(
-                      Iconsax.star1,
-                      size: 18,
-                      color: Colors.yellow.shade700,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          //************************* Price text *************************//
-          Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 10),
-            child: Row(
-              children: [
-                Text(
-                  'Price : ',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: ColorManager.tertiary,
-                  ),
-                ),
-                Text(
-                  '${car.cost} / Day',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: ColorManager.tertiary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          //************************* Description Heading *************************//
-          Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 5),
-            child: Row(
-              children: [
-                Text(
-                  'Description',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: ColorManager.tertiary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          //************************* Description text *************************//
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  car.description,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: ColorManager.primary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          //************************* Favourite button and booking button *************************//
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 15,
-              vertical: 10,
-            ),
-            child: Row(
-              children: [
-                //************************* Favourite button *************************//
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        car.isAvailable ? ColorManager.secondary : Colors.red,
-                    foregroundColor:
-                        car.isAvailable ? ColorManager.secondary : Colors.red,
-                    shadowColor:
-                        car.isAvailable ? ColorManager.secondary : Colors.red,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                  child: Icon(
-                    Icons.favorite_border_outlined,
-                    color: car.isAvailable ? Colors.black : Colors.white,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                //************************* Booking button *************************//
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      if (car.isAvailable) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BookingScreen(car: car),
-                          ),
-                        );
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      width: double.infinity,
-                      height: 55,
-                      decoration: BoxDecoration(
-                        color: car.isAvailable
-                            ? ColorManager.secondary
-                            : Colors.red,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          car.isAvailable ? "Book Now" : "Not Available",
-                          style: TextStyle(
-                            color:
-                                car.isAvailable ? Colors.black : Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //******************* Back button *******************//
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                _controller.pause();
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.arrow_back_ios),
+                              style: IconButton.styleFrom(
+                                backgroundColor: ColorManager.secondary,
+                                fixedSize: const Size(50, 50),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        //******************* Car name and rating *******************//
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Car name
+                            Text(
+                              widget.car.name,
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: ColorManager.tertiary,
+                              ),
+                            ),
+                            // Rating
+                            Row(
+                              children: [
+                                Text(
+                                  widget.car.rating,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: ColorManager.tertiary,
+                                  ),
+                                ),
+                                Icon(
+                                  Iconsax.star1,
+                                  size: 20,
+                                  color: Colors.yellow.shade700,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        //******************* Book Now Buttons *******************//
+                        InkWell(
+                          onTap: () {
+                            if (widget.car.isAvailable) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      BookingScreen(car: widget.car),
+                                ),
+                              );
+                            }
+                          },
+                          child: Container(
+                            height: 55,
+                            decoration: BoxDecoration(
+                              color: widget.car.isAvailable
+                                  ? ColorManager.secondary
+                                  : Colors.red,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(
+                                widget.car.isAvailable
+                                    ? "Book Now"
+                                    : "Not Available",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: widget.car.isAvailable
+                                      ? Colors.black
+                                      : Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),
               ],
-            ),
-          ),
-          const SizedBox(height: 15),
-        ],
-      ),
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }
