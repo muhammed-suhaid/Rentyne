@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:rentyne/resources/url_paths.dart';
 import 'package:video_player/video_player.dart';
 import 'package:iconsax/iconsax.dart';
@@ -164,7 +165,17 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                 ),
               ],
             )
-          : const Center(child: CircularProgressIndicator()),
+          : Container(
+                key: const ValueKey(1),
+                color: Colors.black.withOpacity(0.9),
+                child: Center(
+                  child: Lottie.asset(
+                    AnimationAssets.loading,
+                    width: 200,
+                    height: 200,
+                  ),
+                ),
+              ),
     );
   }
 }
