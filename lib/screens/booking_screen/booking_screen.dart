@@ -93,7 +93,7 @@ class _BookingScreenState extends State<BookingScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.network(
-                "${AppUrl.googleLink}${widget.car.videoUrl}",
+                "${AppUrl.googleLinkImage}${widget.car.image}",
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,

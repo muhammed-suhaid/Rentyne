@@ -58,7 +58,7 @@ class _HomeCarItemState extends State<HomeCarItem> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: Image.network(
-                            "${AppUrl.googleLink}${car.videoUrl}",
+                            "${AppUrl.googleLinkImage}${car.image}",
                             height: 200,
                             width: double.infinity,
                             fit: BoxFit.cover,
