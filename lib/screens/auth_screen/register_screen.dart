@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:rentyne/components/my_button.dart';
 import 'package:rentyne/components/tabs.dart';
 import 'package:rentyne/model/register_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
+import 'package:rentyne/resources/url_paths.dart';
 import 'package:rentyne/screens/auth_screen/login_screen.dart';
 import 'package:rentyne/services/register_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,142 +26,151 @@ class _LoginScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18),
+      body: Center(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //************************* Image *************************//
-              const SizedBox(height: 50),
-              const SizedBox(
-                height: 300,
-                // child: Image.asset(
-                //   'assets/images/plant4.png',
-                //   fit: BoxFit.fitHeight,
-                // ),
-              ),
-              const SizedBox(height: 20),
-              //************************* UserName textfield *************************//
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: ColorManager.tertiary,
-                ),
-                child: TextField(
-                  controller: userNameController,
-                  cursorColor: ColorManager.secondary,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    hintText: 'UserName',
-                    hintStyle: TextStyle(color: ColorManager.primary),
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              //************************* Phone textfield *************************//
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: ColorManager.tertiary,
-                ),
-                child: TextField(
-                  controller: phoneController,
-                  cursorColor: ColorManager.secondary,
-                  keyboardType: TextInputType.phone,
-                  maxLength: 10,
-                  decoration: InputDecoration(
-                    hintText: 'Phone Number',
-                    hintStyle: TextStyle(color: ColorManager.primary),
-                    border: InputBorder.none,
-                    counterText: '',
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              //************************* Email textfield *************************//
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: ColorManager.tertiary,
-                ),
-                child: TextField(
-                  controller: emailController,
-                  cursorColor: ColorManager.secondary,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    hintStyle: TextStyle(color: ColorManager.primary),
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              //************************* password textfield *************************//
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: ColorManager.tertiary,
-                ),
-                child: TextField(
-                  obscureText: true,
-                  controller: passwordController,
-                  cursorColor: ColorManager.secondary,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    hintStyle: TextStyle(color: ColorManager.primary),
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              //************************* Register Now Button *************************//
-              MyButton(
-                text: 'Register Now',
-                onTap: () {
-                  onButtonPressed(
-                    context,
-                    userNameController.text,
-                    emailController.text,
-                    phoneController.text,
-                    passwordController.text,
-                  );
-                },
-              ),
-              //************************* Already have an account Login Now *************************//
-              Row(
+          child: ConstrainedBox(
+            constraints:
+                const BoxConstraints(maxWidth: 400), // optional max width
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Already have an account?',
-                    style: TextStyle(
-                      color: ColorManager.tertiary,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Login Now',
-                      style: TextStyle(
-                        color: ColorManager.secondary,
+                  //************************* Animation video *************************//
+                  Container(
+                    key: const ValueKey(1),
+                    color: Colors.black.withOpacity(0.9),
+                    child: Center(
+                      child: Lottie.asset(
+                        AnimationAssets.loading,
+                        width: 200,
+                        height: 200,
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 20),
+                  //************************* UserName textfield *************************//
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: ColorManager.tertiary,
+                    ),
+                    child: TextField(
+                      controller: userNameController,
+                      cursorColor: ColorManager.secondary,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: 'UserName',
+                        hintStyle: TextStyle(color: ColorManager.primary),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  //************************* Phone textfield *************************//
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: ColorManager.tertiary,
+                    ),
+                    child: TextField(
+                      controller: phoneController,
+                      cursorColor: ColorManager.secondary,
+                      keyboardType: TextInputType.phone,
+                      maxLength: 10,
+                      decoration: InputDecoration(
+                        hintText: 'Phone Number',
+                        hintStyle: TextStyle(color: ColorManager.primary),
+                        border: InputBorder.none,
+                        counterText: '',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  //************************* Email textfield *************************//
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: ColorManager.tertiary,
+                    ),
+                    child: TextField(
+                      controller: emailController,
+                      cursorColor: ColorManager.secondary,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        hintText: 'Email',
+                        hintStyle: TextStyle(color: ColorManager.primary),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  //************************* password textfield *************************//
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: ColorManager.tertiary,
+                    ),
+                    child: TextField(
+                      obscureText: true,
+                      controller: passwordController,
+                      cursorColor: ColorManager.secondary,
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle: TextStyle(color: ColorManager.primary),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  //************************* Register Now Button *************************//
+                  MyButton(
+                    text: 'Register Now',
+                    onTap: () {
+                      onButtonPressed(
+                        context,
+                        userNameController.text,
+                        emailController.text,
+                        phoneController.text,
+                        passwordController.text,
+                      );
+                    },
+                  ),
+                  //************************* Already have an account Login Now *************************//
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Already have an account?',
+                        style: TextStyle(
+                          color: ColorManager.tertiary,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Login Now',
+                          style: TextStyle(
+                            color: ColorManager.secondary,
+                          ),
+                        ),
+                      )
+                    ],
                   )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
         ),
       ),

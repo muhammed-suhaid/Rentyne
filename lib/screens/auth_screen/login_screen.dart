@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:rentyne/components/my_button.dart';
 import 'package:rentyne/components/tabs.dart';
 import 'package:rentyne/model/login_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
+import 'package:rentyne/resources/url_paths.dart';
 import 'package:rentyne/screens/auth_screen/register_screen.dart';
 import 'package:rentyne/services/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,13 +29,17 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //************************* Image *************************//
-            const SizedBox(
-              height: 300,
-              // child: Image.asset(
-              //   'assets/images/plant1.png',
-              //   fit: BoxFit.fitHeight,
-              // ),
+            //************************* Animation video *************************//
+            Container(
+              key: const ValueKey(1),
+              color: Colors.black.withOpacity(0.9),
+              child: Center(
+                child: Lottie.asset(
+                  AnimationAssets.loading,
+                  width: 200,
+                  height: 200,
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             //************************* UserName textfield *************************//
@@ -120,11 +126,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 //************************* Shared preference ********************//
-Future<void> storeUserId(int id) async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setInt('userId', id);
-}
-
+  Future<void> storeUserId(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('userId', id);
+  }
 
 //************************* onButtonPressed function ********************//
   Future<void> onButtonPressed(
@@ -137,9 +142,9 @@ Future<void> storeUserId(int id) async {
           debugPrint("function called inside onButtonPressed (if)");
           debugPrint('ID: ${response.id}');
           debugPrint('Success: ${response.success}');
-            
+
           storeUserId(response.id);
-          
+
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Login successful!'),
