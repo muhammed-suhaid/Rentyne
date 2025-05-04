@@ -8,13 +8,13 @@ String registerModeltoJson(RegisterModel data) =>
 
 /// Success Model
 class RegisterModel {
-  final int? id;
+  final int id;
   final String? user;
   final String? phone;
   final String? email;
 
   RegisterModel({
-    this.id,
+    required this.id,
     this.user,
     this.phone,
     this.email,

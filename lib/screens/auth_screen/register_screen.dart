@@ -5,6 +5,7 @@ import 'package:rentyne/model/register_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/screens/auth_screen/login_screen.dart';
 import 'package:rentyne/services/register_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -165,6 +166,12 @@ class _LoginScreenState extends State<RegisterScreen> {
     );
   }
 
+  //************************* Shared preference ********************//
+  Future<void> storeUserId(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('userId', id);
+  }
+
   //************************* onButtonPressed function ********************//
 
   Future<void> onButtonPressed(
@@ -183,6 +190,8 @@ class _LoginScreenState extends State<RegisterScreen> {
           debugPrint('User: ${response.user}');
           debugPrint('Phone: ${response.phone}');
           debugPrint('Email: ${response.email}');
+
+          storeUserId(response.id);
 
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
