@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import 'package:rentyne/components/tabs.dart';
 import 'package:rentyne/model/booking_model.dart';
 import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
@@ -340,6 +341,16 @@ class _BookingScreenState extends State<BookingScreen> {
           );
           debugPrint("Booking successful!");
           debugPrint("Booking ID: ${response.booking?.id}");
+
+          Future.delayed(const Duration(milliseconds: 500), () {
+            if (mounted) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const TabsScreen()),
+                (route) => false,
+              );
+            }
+          });
         } else if (response is Map && response.containsKey('error')) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
