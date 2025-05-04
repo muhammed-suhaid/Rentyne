@@ -116,35 +116,50 @@ class _LoginScreenState extends State<LoginScreen> {
 //************************* onButtonPressed function ********************//
 
   Future<void> onButtonPressed(
-   BuildContext context, String userName, String password) async {
- try {
-   debugPrint("Button pressed. Attempting to login...");
-   await loginUser(userName, password).then((response) {
+      BuildContext context, String userName, String password) async {
+    try {
+      debugPrint("Button pressed. Attempting to login...");
+      await loginUser(userName, password).then((response) {
+        // Check if the response is of type LoginModel
+        if (response is LoginModel && response.success == 'User Found') {
+          debugPrint("function called inside onButtonPressed (if)");
+          debugPrint('ID: ${response.id}');
+          debugPrint('Success: ${response.success}');
 
-     // Check if the response is of type LoginModel
-     if (response is LoginModel && response.success == 'User Found') {
-       debugPrint("function called inside onButtonPressed (if)");
-       debugPrint('ID: ${response.id}');
-       debugPrint('Success: ${response.success}');
-       
-       if (mounted) {
-         Navigator.pushReplacement(
-           context,
-           MaterialPageRoute(
-             builder: (context) => const TabsScreen(),
-           ),
-         );
-       }
-     } else if (response is LoginErrorModel) {
-       debugPrint("function called inside onButtonPressed (else)");
-       debugPrint('Error: ${response.error}');
-     }
-   });
- } catch (error) {
-   // Handle any exceptions here, e.g., show an error dialog
-   debugPrint("Error: $error");
-   // Show an error dialog or handle the error accordingly
- }
-}
-
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Login successful!'),
+              backgroundColor: Colors.green,
+              behavior: SnackBarBehavior.floating,
+              duration: Duration(seconds: 2),
+            ),
+          );
+          Future.delayed(const Duration(milliseconds: 500), () {
+            if (mounted) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const TabsScreen()),
+              );
+            }
+          });
+        } else if (response is LoginErrorModel) {
+          debugPrint("function called inside onButtonPressed (else)");
+          debugPrint('Error: ${response.error}');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content:
+                  Text(response.error ?? 'Login failed. Please try again.'),
+              backgroundColor: Colors.red,
+              behavior: SnackBarBehavior.floating,
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      });
+    } catch (error) {
+      // Handle any exceptions here, e.g., show an error dialog
+      debugPrint("Error: $error");
+      // Show an error dialog or handle the error accordingly
+    }
+  }
 }
