@@ -1,13 +1,12 @@
 import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/asset_data.dart';
-import 'package:rentyne/resources/asset_manager.dart';
 
 final List<Car> carList = [
   const Car(
     id: '1',
     brand: 'BMW',
     name: 'BMW M3',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.bmwM3_1,
     videoUrl: VideoAsset.bmwM3_1,
     description:
         'The BMW M3 stands as a benchmark in the world of high-performance sports sedans. Known for its aggressive styling, dynamic handling, and precise German engineering, the M3 continues to evolve with each generation. Under the hood lies a turbocharged inline-six engine delivering thrilling power with remarkable smoothness. The M3 is not just about speed—it’s a complete driver’s machine, built with a balanced chassis, finely tuned suspension, and razor-sharp steering. Inside, the cabin combines luxury and sport with leather upholstery, M-specific accents, and an advanced infotainment system. This car strikes a rare balance between track-ready agility and everyday practicality, making it a favorite among enthusiasts and professionals alike.',
@@ -20,7 +19,7 @@ final List<Car> carList = [
     id: '2',
     brand: 'BMW',
     name: 'BMW M3',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.bmwM3,
     videoUrl: VideoAsset.bmwM3,
     description:
         'The BMW M3 is a true icon in automotive history, representing power, elegance, and performance in a compact, luxurious package. This variant refines its predecessor with a sharper design, more aggressive aerodynamic features, and a retuned suspension setup for greater agility. The dual exhausts roar with every acceleration, and the rear-wheel-drive dynamics ensure an exhilarating ride. Technology-wise, it’s equipped with the latest driver-assist systems, performance telemetry, and premium surround sound. The M3 has long set the standard for what a sports sedan should be, offering enthusiasts and everyday drivers alike an unparalleled blend of speed, comfort, and prestige. It’s a car that invites you to drive it hard, but rewards precision.',
@@ -33,7 +32,7 @@ final List<Car> carList = [
     id: '3',
     brand: 'Honda',
     name: 'Honda NSX',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.hondaNSX,
     videoUrl: VideoAsset.hondaNSX,
     description:
         'The Honda NSX is the epitome of Japanese innovation and supercar engineering. Developed with insights from F1 legend Ayrton Senna, the NSX merges power, precision, and reliability in a way that few exotics can. Its hybrid powertrain pairs a twin-turbocharged V6 with three electric motors for instant torque and explosive acceleration. Yet, it\'s surprisingly user-friendly, offering quiet comfort when cruising. With a low-slung design, forged aluminum frame, and advanced aerodynamics, it slices through the air with grace. Inside, the NSX delivers a modern cockpit experience with digital gauges, leather-trimmed surfaces, and intuitive controls. It\'s a technological masterpiece built to thrill and endure.',
@@ -46,7 +45,7 @@ final List<Car> carList = [
     id: '4',
     brand: 'Lamborghini',
     name: 'Lamborghini Diablo',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.lamborginiDiablo,
     videoUrl: VideoAsset.lamborginiDiablo,
     description:
         'The Lamborghini Diablo is a wild, untamed beast from the golden age of supercars. Its aggressive wedge shape, scissor doors, and brutal V12 performance make it one of the most memorable Lamborghinis ever produced. The Diablo is not refined—it’s raw. From the moment you start the engine, you’re reminded that this machine was built to thrill, not coddle. Its unassisted steering, firm clutch, and analog controls give it a tactile driving experience that modern cars often lack. Inside, leather wraps the cabin in Italian style, and analog dials keep things classic. Despite its challenging demeanor, the Diablo is a symbol of pure, unfiltered performance and automotive audacity.',
@@ -59,7 +58,7 @@ final List<Car> carList = [
     id: '5',
     brand: 'Mazda',
     name: 'Mazda RX7 Veilside',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.mazdaRx7Veilside,
     videoUrl: VideoAsset.mazdaRx7Veilside,
     description:
         'The Mazda RX7 Veilside is an automotive icon reborn through aggressive styling and aftermarket perfection. This RX7 is best known for its appearance in the Fast & Furious franchise, and for good reason—it looks like a machine built for speed. The Veilside body kit transforms the RX7’s curvy profile into a muscular, wide-bodied beast, complete with flared arches and bold aero enhancements. Under the hood lies a lightweight rotary engine capable of high-revving performance. With rear-wheel drive and a low center of gravity, the RX7 handles like a dream. The interior is all business—bucket seats, a race-inspired wheel, and minimal distractions. This car is art in motion for JDM enthusiasts.',
@@ -72,7 +71,7 @@ final List<Car> carList = [
     id: '6',
     brand: 'Mazda',
     name: 'Mazda RX7',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.mazdaRx7,
     videoUrl: VideoAsset.mazdaRx7,
     description:
         'The Mazda RX7 is one of the most iconic JDM sports cars of all time, revered for its lightweight chassis, perfect balance, and unique rotary engine. Unlike traditional piston engines, the rotary engine offers smooth, high-revving power that feels endlessly energetic. The RX7’s sleek design, pop-up headlights, and compact proportions make it instantly recognizable. On twisty roads or the track, its handling is sharp and intuitive, with communicative steering and exceptional weight distribution. Inside, the cockpit is purpose-built with deep bucket seats and a driver-focused dash layout. It’s a purist’s machine—simple, stylish, and performance-focused in every aspect.',
@@ -85,7 +84,7 @@ final List<Car> carList = [
     id: '7',
     brand: 'McLaren',
     name: 'McLaren 720S',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.mclaren720s,
     videoUrl: VideoAsset.mclaren720s,
     description:
         'The McLaren 720S is a modern-day hypercar engineered for extreme speed, agility, and visual impact. Its carbon-fiber Monocage II chassis provides rigidity and lightweight performance, helping it rocket from 0–60 mph in under 3 seconds. The twin-turbo V8 produces over 700 horsepower, and it sounds every bit as brutal as it is fast. The body is sculpted not just for beauty but for aerodynamics, with every vent, curve, and flap serving a purpose. Inside, the 720S balances minimalist race-car aesthetics with luxury finishes—aluminum, Alcantara, and an advanced digital cockpit. Every detail is designed for driver connection, making this one of the most engaging supercars in the world.',
@@ -98,7 +97,7 @@ final List<Car> carList = [
     id: '8',
     brand: 'Mitsubishi',
     name: 'Mitsubishi Evo',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.mistibushiEvo,
     videoUrl: VideoAsset.mistibushiEvo,
     description:
         'The Mitsubishi Lancer Evolution, affectionately known as the Evo, is a rally-bred street machine built for aggressive driving. With its turbocharged inline-four engine, all-wheel drive, and rally-derived suspension, the Evo offers explosive acceleration and pin-sharp cornering. The design is functional yet aggressive, with a large rear wing, flared fenders, and vented hoods. Inside, the cabin is performance-focused—Recaro seats, minimal distractions, and performance gauges dominate the interior. The Evo excels in all conditions, from twisty mountain roads to rain-soaked asphalt. Its combination of tunability, traction, and raw energy has earned it a devoted following and a place in motorsport history.',
@@ -111,7 +110,7 @@ final List<Car> carList = [
     id: '9',
     brand: 'Nissan',
     name: 'Nissan GTR R34',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.nissanGtrR34,
     videoUrl: VideoAsset.nissanGtrR34,
     description:
         'The Nissan GTR R34 is a masterpiece of precision and power, revered as one of the most iconic performance cars ever built. Known for its advanced ATTESA E-TS all-wheel-drive system, the R34 provides incredible grip and handling. The RB26DETT inline-six twin-turbocharged engine is a legend in itself—capable of tremendous tuning potential and unmatched durability. Its bold design, round tail lights, and aggressive stance have become symbolic of the Skyline legacy. Inside, it features a unique multi-function display that gives the driver real-time data like G-forces and boost levels. Whether on the street or the track, the R34 is a raw and thrilling machine with unmatched cultural impact.',
@@ -124,7 +123,7 @@ final List<Car> carList = [
     id: '10',
     brand: 'Porsche',
     name: 'Porsche 911 GT3 RS',
-    imageUrl: ImageAssets.getStarted1,
+    imageUrl: ImagesAsset.porsche911GT3RS,
     videoUrl: VideoAsset.porsche911GT3RS,
     description:
         'The Porsche 911 GT3 RS is the ultimate track-focused variant of the legendary 911 series. With its naturally aspirated flat-six engine screaming to over 9000 RPM, it delivers pure, unfiltered performance. Lightweight materials like carbon fiber and magnesium are used extensively throughout the chassis and bodywork to reduce weight and enhance speed. The GT3 RS features a wide body, massive fixed rear wing, aggressive front splitter, and functional air vents that increase downforce and improve cooling. Inside, it’s all business—racing seats, roll cage, and minimalist creature comforts. It’s engineered for precision on every corner and delivers one of the most visceral driving experiences available in a road-legal car.',
@@ -137,7 +136,7 @@ final List<Car> carList = [
     id: '11',
     brand: 'Porsche',
     name: 'Porsche 911 Targa',
-    imageUrl: ImageAssets.getStarted1,
+    imageUrl: ImagesAsset.porsche911Targa,
     videoUrl: VideoAsset.porsche911Targa,
     description:
         'The Porsche 911 Targa is a timeless blend of classic style and modern performance. Known for its distinctive roll bar and retractable roof design, the Targa provides the open-air freedom of a convertible while maintaining the structural rigidity of a coupe. Beneath its elegant body lies a turbocharged flat-six engine that delivers smooth yet potent power. The Targa is equipped with Porsche’s all-wheel-drive system, enhancing stability and grip in all driving conditions. Inside, luxury meets sport with leather seating, digital instrumentation, and a responsive infotainment system. The 911 Targa is a perfect fusion of retro aesthetics, contemporary engineering, and all-season capability, ideal for drivers who want style and substance.',
@@ -150,7 +149,7 @@ final List<Car> carList = [
     id: '12',
     brand: 'Subaru',
     name: 'Subaru WRX STI',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.subaruWrxSti,
     videoUrl: VideoAsset.subaruWrxSti,
     description:
         'The Subaru WRX STI is a rally-bred sports sedan that brings motorsport excitement to the road. Famous for its all-wheel-drive traction and boxer engine, the STI is built to conquer twisty roads and adverse weather with confidence. Its aggressive design includes a large hood scoop, flared fenders, and a signature rear wing. The turbocharged 2.5L engine offers punchy acceleration, and the manual transmission gives drivers complete control. The WRX STI features a performance-tuned suspension and Brembo brakes, allowing for sharp handling and quick stops. Inside, the cabin balances function and comfort with bolstered seats, red stitching, and a driver-focused layout. It\'s raw, engaging, and built for enthusiasts.',
@@ -163,7 +162,7 @@ final List<Car> carList = [
     id: '13',
     brand: 'Toyota',
     name: 'Toyota Supra MK4',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.toyotaSupraMK4,
     videoUrl: VideoAsset.toyotaSupraMK4,
     description:
         'The Toyota Supra MK4 is one of the most revered performance cars in automotive history. Powered by the legendary 2JZ-GTE inline-six engine, the MK4 offers near-endless tuning potential and bulletproof reliability. Its sleek, curvaceous body and signature rear wing have made it a favorite among tuners and movie buffs alike. Performance-wise, the Supra MK4 was ahead of its time, offering acceleration and handling on par with more expensive European rivals. The interior features a driver-centric layout, analog gauges, and a cockpit-like feel. Whether stock or modified, the MK4 Supra remains a cultural icon and a testament to Toyota’s engineering prowess in creating a timeless legend.',
@@ -176,7 +175,7 @@ final List<Car> carList = [
     id: '14',
     brand: 'Toyota',
     name: 'Toyota Supra MK5',
-    imageUrl: ImageAssets.getStarted3,
+    imageUrl: ImagesAsset.toyotaSupraMK5,
     videoUrl: VideoAsset.toyotaSupraMK5,
     description:
         'The Toyota Supra MK5 is the modern interpretation of a legendary nameplate, blending Japanese heritage with German engineering precision. Developed in collaboration with BMW, the MK5 features a turbocharged inline-six engine that delivers blistering acceleration and refined power delivery. The exterior design is bold and aggressive, with sculpted curves, wide fenders, and signature double-bubble roof styling. Inside, the cabin is focused and luxurious, offering a mix of digital technology and sports car ergonomics. The MK5 Supra handles with poise, thanks to its near 50:50 weight distribution and adaptive suspension. It’s a rebirth that honors the past while embracing modern performance, making it a worthy successor.',

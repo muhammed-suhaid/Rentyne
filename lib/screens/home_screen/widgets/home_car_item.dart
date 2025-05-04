@@ -50,7 +50,7 @@ class _HomeCarItemState extends State<HomeCarItem> {
                         //************************* Image *************************//
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
+                          child: Image.network(
                             car.imageUrl,
                             height: 200,
                             width: double.infinity,

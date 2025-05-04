@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rentyne/data/get_satarted_data.dart';
 import 'package:rentyne/resources/color_manager.dart';
-import 'package:rentyne/screens/components/tabs.dart';
+import 'package:rentyne/screens/auth/login_screen.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({super.key});
@@ -28,7 +28,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
       } else {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const TabsScreen(),
+            builder: (context) => const LoginScreen(),
           ),
         );
       }
@@ -39,7 +39,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
   void _skip() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const TabsScreen(),
+        builder: (context) => const LoginScreen(),
       ),
     );
   }

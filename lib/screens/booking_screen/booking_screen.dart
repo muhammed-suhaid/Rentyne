@@ -80,7 +80,7 @@ class _BookingScreenState extends State<BookingScreen> {
             //************************* Car image *************************//
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
+              child: Image.network(
                 widget.car.imageUrl,
                 height: 200,
                 width: double.infinity,
