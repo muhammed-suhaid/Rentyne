@@ -17,7 +17,7 @@ class MyButton extends StatelessWidget {
         onTap();
       },
       child: Container(
-        height: 60,
+        height: 50,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -29,6 +29,7 @@ class MyButton extends StatelessWidget {
           style: const TextStyle(
             color: Colors.black,
             fontSize: 18,
+            fontWeight: FontWeight.w500
           ),
         )),
       ),

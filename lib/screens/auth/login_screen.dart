@@ -26,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //************************* Image *************************//
             const SizedBox(
               height: 300,
               // child: Image.asset(
@@ -34,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // ),
             ),
             const SizedBox(height: 20),
+            //************************* UserName textfield *************************//
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
@@ -43,15 +45,16 @@ class _LoginScreenState extends State<LoginScreen> {
               child: TextField(
                 controller: userNameController,
                 cursorColor: ColorManager.secondary,
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  hintText: 'Email',
+                  hintText: 'Username',
                   hintStyle: TextStyle(color: ColorManager.primary),
                   border: InputBorder.none,
                 ),
               ),
             ),
             const SizedBox(height: 20),
+            //************************* Password textfield *************************//
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
@@ -70,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const SizedBox(height: 20),
+            //************************* Login Now button *************************//
             MyButton(
               text: 'Login Now',
               onTap: () {
@@ -80,6 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               },
             ),
+            //************************* Dont have account register *************************//
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
