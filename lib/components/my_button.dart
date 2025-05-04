@@ -3,7 +3,7 @@ import 'package:rentyne/resources/color_manager.dart';
 
 class MyButton extends StatelessWidget {
   final String text;
-  final void Function() onTap;
+  final Function onTap;
   const MyButton({
     super.key,
     required this.text,
@@ -13,7 +13,9 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: (){
+        onTap();
+      },
       child: Container(
         height: 60,
         width: double.infinity,

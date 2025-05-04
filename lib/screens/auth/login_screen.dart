@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rentyne/components/my_button.dart';
+import 'package:rentyne/components/tabs.dart';
+import 'package:rentyne/model/login_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/screens/auth/register_screen.dart';
+import 'package:rentyne/services/login_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,12 +14,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  //Login method
-  void login() async {
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +26,12 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 300,
-              child: Image.asset(
-                'assets/images/plant1.png',
-                fit: BoxFit.fitHeight,
-              ),
+              // child: Image.asset(
+              //   'assets/images/plant1.png',
+              //   fit: BoxFit.fitHeight,
+              // ),
             ),
             const SizedBox(height: 20),
             Container(
@@ -42,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: ColorManager.tertiary,
               ),
               child: TextField(
-                controller: emailController,
+                controller: userNameController,
                 cursorColor: ColorManager.secondary,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -73,7 +72,13 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 20),
             MyButton(
               text: 'Login Now',
-              onTap: login,
+              onTap: () {
+                onButtonPressed(
+                  context,
+                  userNameController.text,
+                  passwordController.text,
+                );
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -107,4 +112,39 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+//************************* onButtonPressed function ********************//
+
+  Future<void> onButtonPressed(
+   BuildContext context, String userName, String password) async {
+ try {
+   debugPrint("Button pressed. Attempting to login...");
+   await loginUser(userName, password).then((response) {
+
+     // Check if the response is of type LoginModel
+     if (response is LoginModel && response.success == 'User Found') {
+       debugPrint("function called inside onButtonPressed (if)");
+       debugPrint('ID: ${response.id}');
+       debugPrint('Success: ${response.success}');
+       
+       if (mounted) {
+         Navigator.pushReplacement(
+           context,
+           MaterialPageRoute(
+             builder: (context) => const TabsScreen(),
+           ),
+         );
+       }
+     } else if (response is LoginErrorModel) {
+       debugPrint("function called inside onButtonPressed (else)");
+       debugPrint('Error: ${response.error}');
+     }
+   });
+ } catch (error) {
+   // Handle any exceptions here, e.g., show an error dialog
+   debugPrint("Error: $error");
+   // Show an error dialog or handle the error accordingly
+ }
+}
+
 }
