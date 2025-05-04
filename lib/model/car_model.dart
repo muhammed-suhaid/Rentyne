@@ -1,25 +1,40 @@
-class Car {
-  const Car({
+class CarModel {
+  final int id;
+  final String name;
+  final String brand;
+  final String description;
+  final double price;
+  final bool isAvailable;
+  final DateTime createdAt;
+  final double rating;
+  final String image;
+  final String videoUrl;
+
+  CarModel({
     required this.id,
-    required this.brand,
     required this.name,
-    required this.imageUrl,
-    required this.videoUrl,
+    required this.brand,
     required this.description,
+    required this.price,
     required this.isAvailable,
     required this.createdAt,
-    required this.cost,
     required this.rating,
+    required this.image,
+    required this.videoUrl,
   });
 
-  final String id;
-  final String brand;
-  final String name;
-  final String imageUrl;
-  final String videoUrl;
-  final String description;
-  final bool isAvailable;
-  final String createdAt;
-  final String cost;
-  final String rating;
+  factory CarModel.fromJson(Map<String, dynamic> json) {
+    return CarModel(
+      id: json['id'],
+      name: json['name'],
+      brand: json['brand'],
+      description: json['description'],
+      price: double.parse(json['price']),
+      isAvailable: json['is_available'],
+      createdAt: DateTime.parse(json['created_at']),
+      rating: double.parse(json['rating']),
+      image: json['image'],
+      videoUrl: json['video_url'],
+    );
+  }
 }

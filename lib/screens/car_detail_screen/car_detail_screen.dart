@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rentyne/resources/url_paths.dart';
 import 'package:video_player/video_player.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:rentyne/model/car_model.dart';
@@ -7,7 +8,7 @@ import 'package:rentyne/screens/booking_screen/booking_screen.dart';
 
 class CarDetailsScreen extends StatefulWidget {
   const CarDetailsScreen({super.key, required this.car});
-  final Car car;
+  final CarModel car;
 
   @override
   State<CarDetailsScreen> createState() => _CarDetailsScreenState();
@@ -25,7 +26,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
   // Initialize the video
   void _initializeVideo() {
     _controller =
-        VideoPlayerController.networkUrl(Uri.parse(widget.car.videoUrl))
+        VideoPlayerController.networkUrl(Uri.parse("${AppUrl.googleLink}${widget.car.videoUrl}"))
           ..initialize().then((_) {
             setState(() {});
             _controller.setVolume(0);
@@ -104,7 +105,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                             Row(
                               children: [
                                 Text(
-                                  widget.car.rating,
+                                  widget.car.rating.toString(),
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: ColorManager.tertiary,

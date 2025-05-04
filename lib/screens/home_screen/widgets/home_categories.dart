@@ -10,8 +10,8 @@ class HomeCategories extends StatefulWidget {
     required this.availableCars,
     required this.favouriteCars,
   });
-  final List<Car> availableCars;
-  final List<Car> favouriteCars;
+  final List<CarModel> availableCars;
+  final List<CarModel> favouriteCars;
 
   @override
   State<HomeCategories> createState() => _HomeCategoriesState();
@@ -32,14 +32,15 @@ class _HomeCategoriesState extends State<HomeCategories> {
     'Toyota',
   ];
 
-  List<Car> filteredCars = [];
+  List<CarModel> filteredCars = [];
 
-  List<Car> _categorizedCars(String brand) {
-    return filteredCars =
+  List<CarModel> _categorizedCars(String brand) {
+    List<CarModel> filteredCars =
         widget.availableCars.where((car) => car.brand.contains(brand)).toList();
+    return filteredCars;
   }
 
-  void onSelectCar(BuildContext context, Car car) {
+  void onSelectCar(BuildContext context, CarModel car) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => CarDetailsScreen(car: car),
@@ -118,7 +119,7 @@ class _HomeCategoriesState extends State<HomeCategories> {
           categorizedCars: _categorizedCars(
             carBrands[currentBrand],
           ),
-          onSelectCar: (Car car) {
+          onSelectCar: (CarModel car) {
             onSelectCar(context, car);
           },
           favouriteCars: widget.favouriteCars,

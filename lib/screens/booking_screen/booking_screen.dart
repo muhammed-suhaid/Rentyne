@@ -3,11 +3,12 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
+import 'package:rentyne/resources/url_paths.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key, required this.car});
 
-  final Car car;
+  final CarModel car;
 
   @override
   State<BookingScreen> createState() => _BookingScreenState();
@@ -81,7 +82,7 @@ class _BookingScreenState extends State<BookingScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.network(
-                widget.car.imageUrl,
+                "${AppUrl.googleLink}${widget.car.videoUrl}",
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -100,7 +101,7 @@ class _BookingScreenState extends State<BookingScreen> {
             //************************* Car cost text *************************//
             const SizedBox(height: 10),
             Text(
-              'Cost per day : ${widget.car.cost}/-',
+              'Cost per day : ${widget.car.price}/-',
               style: TextStyle(
                 fontSize: 18,
                 color: ColorManager.tertiary,
@@ -221,7 +222,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         color: ColorManager.tertiary),
                   ),
                   Text(
-                    'Total Cost: Rs ${int.parse(widget.car.cost) * _endDate!.difference(_startDate!).inDays}',
+                    'Total Cost: Rs ${double.parse(widget.car.price.toString()) * _endDate!.difference(_startDate!).inDays}',
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

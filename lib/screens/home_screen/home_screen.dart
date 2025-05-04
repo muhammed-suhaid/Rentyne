@@ -9,8 +9,8 @@ class HomeScreen extends StatelessWidget {
     required this.availableCars,
     required this.favouriteCars,
   });
-  final List<Car> availableCars;
-  final List<Car> favouriteCars;
+  final List<CarModel> availableCars;
+  final List<CarModel> favouriteCars;
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
+import 'package:rentyne/resources/url_paths.dart';
 
 class HomeCarItem extends StatefulWidget {
   const HomeCarItem({
@@ -10,9 +11,9 @@ class HomeCarItem extends StatefulWidget {
     required this.onSelectCar,
     required this.favouriteCars,
   });
-  final List<Car> categorizedCars;
-  final void Function(Car car) onSelectCar;
-  final List<Car> favouriteCars;
+  final List<CarModel> categorizedCars;
+  final void Function(CarModel car) onSelectCar;
+  final List<CarModel> favouriteCars;
 
   @override
   State<HomeCarItem> createState() => _HomeCarItemState();
@@ -36,6 +37,12 @@ class _HomeCarItemState extends State<HomeCarItem> {
               itemBuilder: (context, index) {
                 final car = widget.categorizedCars[index];
                 final isFavourite = widget.favouriteCars.contains(car);
+
+                debugPrint('------------------------------');
+                debugPrint('Car - ${index + 1}');
+                debugPrint('Car Name : ${car.name}');
+                debugPrint('Car image url : ${car.image}');
+                debugPrint('Car video url : ${car.videoUrl}');
                 return InkWell(
                   onTap: () {
                     widget.onSelectCar(car);
@@ -51,7 +58,7 @@ class _HomeCarItemState extends State<HomeCarItem> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: Image.network(
-                            car.imageUrl,
+                            "${AppUrl.googleLink}${car.videoUrl}",
                             height: 200,
                             width: double.infinity,
                             fit: BoxFit.cover,
@@ -124,7 +131,7 @@ class _HomeCarItemState extends State<HomeCarItem> {
                                 ),
                               ),
                               Text(
-                                'Rs ${car.cost.toString()} / day',
+                                'Rs ${car.price.toString()} / day',
                                 style: TextStyle(
                                   color: ColorManager.tertiary,
                                   fontSize: 16,
