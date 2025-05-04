@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/screens/home_screen/home_screen.dart';
+import 'package:rentyne/screens/my_booking_screen/my_booking_screen.dart';
 import 'package:rentyne/services/car_service.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _TabsScreenState extends State<TabsScreen> {
       );
     }
     if (_selectedPageindex == 1) {
-      activePage = const SizedBox();
+      activePage = const MyBookingScreen();
     }
     if (_selectedPageindex == 2) {
       activePage = const SizedBox();
@@ -77,8 +78,8 @@ class _TabsScreenState extends State<TabsScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.heart5),
-            label: 'Favourites',
+            icon: Icon(Icons.library_books_sharp),
+            label: 'My Bookings',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

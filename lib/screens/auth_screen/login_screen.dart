@@ -3,7 +3,7 @@ import 'package:rentyne/components/my_button.dart';
 import 'package:rentyne/components/tabs.dart';
 import 'package:rentyne/model/login_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
-import 'package:rentyne/screens/auth/register_screen.dart';
+import 'package:rentyne/screens/auth_screen/register_screen.dart';
 import 'package:rentyne/services/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rentyne/data/get_satarted_data.dart';
 import 'package:rentyne/resources/color_manager.dart';
-import 'package:rentyne/screens/auth/login_screen.dart';
+import 'package:rentyne/screens/auth_screen/login_screen.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({super.key});

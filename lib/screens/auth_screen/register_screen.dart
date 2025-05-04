@@ -3,7 +3,7 @@ import 'package:rentyne/components/my_button.dart';
 import 'package:rentyne/components/tabs.dart';
 import 'package:rentyne/model/register_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
-import 'package:rentyne/screens/auth/login_screen.dart';
+import 'package:rentyne/screens/auth_screen/login_screen.dart';
 import 'package:rentyne/services/register_service.dart';
 
 class RegisterScreen extends StatefulWidget {

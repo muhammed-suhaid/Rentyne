@@ -333,7 +333,7 @@ class _BookingScreenState extends State<BookingScreen> {
         if (response is BookingModel) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Booking successful!'),
+              content: Text('Booking successful!\nKindly Wait for confirmation'),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
               behavior: SnackBarBehavior.floating,
