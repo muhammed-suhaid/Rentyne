@@ -7,11 +7,11 @@ String loginModelToJson(LoginModel data) =>
     json.encode(data.toJson());
 
 class LoginModel {
-  final int? id;
+  final int id;
   final String? success;
 
   LoginModel({
-    this.id,
+    required this.id,
     this.success,
   });
 

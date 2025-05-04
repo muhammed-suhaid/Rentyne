@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import 'package:rentyne/model/booking_model.dart';
 import 'package:rentyne/model/car_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/resources/url_paths.dart';
+import 'package:rentyne/services/booking_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key, required this.car});
@@ -17,6 +20,13 @@ class BookingScreen extends StatefulWidget {
 class _BookingScreenState extends State<BookingScreen> {
   DateTime? _startDate;
   DateTime? _endDate;
+  int? userId;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserId();
+  }
 
   Future<void> _pickStartDate() async {
     final DateTime now = DateTime.now();
@@ -130,9 +140,10 @@ class _BookingScreenState extends State<BookingScreen> {
             Text(
               'Description',
               style: TextStyle(
-                  fontSize: 18,
-                  color: ColorManager.tertiary,
-                  fontWeight: FontWeight.w400),
+                fontSize: 18,
+                color: ColorManager.tertiary,
+                fontWeight: FontWeight.w400,
+              ),
             ),
             const SizedBox(height: 5),
             Text(
@@ -239,9 +250,27 @@ class _BookingScreenState extends State<BookingScreen> {
                       _endDate != null &&
                       widget.car.isAvailable)
                   ? () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Booking Confirmed!')),
-                      );
+                      if (userId != null) {
+                        final formattedStart =
+                            DateFormat('yyyy-MM-dd').format(_startDate!);
+                        final formattedEnd =
+                            DateFormat('yyyy-MM-dd').format(_endDate!);
+
+                        debugPrint("-----------------------------------------");
+                        debugPrint("Car ID : ${widget.car.id.toString()}");
+                        debugPrint("User ID : ${userId.toString()}");
+                        debugPrint("start date : $formattedStart");
+                        debugPrint("end date : $formattedEnd");
+                        debugPrint("-----------------------------------------");
+
+                        onButtonPressed(
+                          context,
+                          carId: widget.car.id,
+                          userId: userId!,
+                          startDate: formattedStart,
+                          endDate: formattedEnd,
+                        );
+                      }
                     }
                   : null,
               child: Container(
@@ -275,5 +304,55 @@ class _BookingScreenState extends State<BookingScreen> {
         ),
       ),
     );
+  }
+
+//************************* Shared preference *************************//
+  Future<void> _fetchUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userId = prefs.getInt('userId');
+    });
+  }
+
+//************************* onButton Pressed *************************//
+  Future<void> onButtonPressed(
+    BuildContext context, {
+    required int carId,
+    required int userId,
+    required String startDate,
+    required String endDate,
+  }) async {
+    try {
+      await createBooking(
+        carId: carId,
+        userId: userId,
+        startDate: startDate,
+        endDate: endDate,
+      ).then((response) {
+        if (response is BookingModel) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Booking successful!'),
+              backgroundColor: Colors.green,
+              duration: Duration(seconds: 2),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          debugPrint("Booking successful!");
+          debugPrint("Booking ID: ${response.booking?.id}");
+        } else if (response is Map && response.containsKey('error')) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(response['error']),
+              backgroundColor: Colors.red,
+              duration: const Duration(seconds: 3),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      });
+    } catch (e) {
+      debugPrint("Booking Error: $e");
+    }
   }
 }

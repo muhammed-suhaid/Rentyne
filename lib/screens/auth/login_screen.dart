@@ -5,6 +5,7 @@ import 'package:rentyne/model/login_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/screens/auth/register_screen.dart';
 import 'package:rentyne/services/login_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -118,8 +119,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-//************************* onButtonPressed function ********************//
+//************************* Shared preference ********************//
+Future<void> storeUserId(int id) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setInt('userId', id);
+}
 
+
+//************************* onButtonPressed function ********************//
   Future<void> onButtonPressed(
       BuildContext context, String userName, String password) async {
     try {
@@ -130,7 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
           debugPrint("function called inside onButtonPressed (if)");
           debugPrint('ID: ${response.id}');
           debugPrint('Success: ${response.success}');
-
+            
+          storeUserId(response.id);
+          
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Login successful!'),
