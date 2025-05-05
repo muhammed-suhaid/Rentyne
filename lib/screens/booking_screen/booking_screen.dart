@@ -84,224 +84,226 @@ class _BookingScreenState extends State<BookingScreen> {
       ),
 
       //************************* Body *************************//
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //************************* Car image *************************//
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.network(
-                "${AppUrl.googleLinkImage}${widget.car.image}",
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(height: 20),
-            //************************* Car Name text *************************//
-            Text(
-              widget.car.name,
-              style: const TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: ColorManager.secondary,
-              ),
-            ),
-            //************************* Car cost text *************************//
-            const SizedBox(height: 10),
-            Text(
-              'Cost per day : ${widget.car.price}/-',
-              style: TextStyle(
-                fontSize: 18,
-                color: ColorManager.tertiary,
-              ),
-            ),
-            const SizedBox(height: 5),
-            //************************* Car Rating text *************************//
-            Row(
-              children: [
-                Text(
-                  'Rating: ${widget.car.rating}',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: ColorManager.tertiary,
-                  ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //************************* Car image *************************//
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.network(
+                  "${AppUrl.googleLinkImage}${widget.car.image}",
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-                Icon(
-                  Iconsax.star1,
-                  size: 18,
-                  color: Colors.yellow.shade700,
+              ),
+              const SizedBox(height: 20),
+              //************************* Car Name text *************************//
+              Text(
+                widget.car.name,
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: ColorManager.secondary,
                 ),
-              ],
-            ),
-            //************************* Description text *************************//
-            const SizedBox(height: 10),
-            Text(
-              'Description',
-              style: TextStyle(
-                fontSize: 18,
-                color: ColorManager.tertiary,
-                fontWeight: FontWeight.w400,
               ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              widget.car.description,
-              style: TextStyle(
-                fontSize: 14,
-                color: ColorManager.primary,
+              //************************* Car cost text *************************//
+              const SizedBox(height: 10),
+              Text(
+                'Cost per day : ${widget.car.price}/-',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: ColorManager.tertiary,
+                ),
               ),
-            ),
-            const SizedBox(height: 30),
-            //************************* Start date and End date button row *************************//
-            Row(
-              children: [
-                // Start Date Button
-                Expanded(
-                  child: InkWell(
-                    onTap: _pickStartDate,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      height: 55,
-                      decoration: BoxDecoration(
-                        color: _startDate == null
-                            ? Colors.red
-                            : ColorManager.secondary,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          _startDate != null
-                              ? DateFormat('dd/MM/yyyy').format(_startDate!)
-                              : "Start Date",
-                          style: TextStyle(
-                            color: _startDate != null
-                                ? Colors.black
-                                : Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+              const SizedBox(height: 5),
+              //************************* Car Rating text *************************//
+              Row(
+                children: [
+                  Text(
+                    'Rating: ${widget.car.rating}',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: ColorManager.tertiary,
                     ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                // End Date Button
-                Expanded(
-                  child: InkWell(
-                    onTap: _startDate != null ? _pickEndDate : null,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      height: 55,
-                      decoration: BoxDecoration(
-                        color: _endDate != null
-                            ? ColorManager.secondary
-                            : Colors.red,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          _endDate != null
-                              ? DateFormat('dd/MM/yyyy').format(_endDate!)
-                              : "End Date",
-                          style: TextStyle(
-                            color:
-                                _endDate != null ? Colors.black : Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //************************* Total date selected and also the price *************************//
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (_startDate != null && _endDate != null) ...[
-                  Text(
-                    'Total Days: ${_endDate!.difference(_startDate!).inDays}',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: ColorManager.tertiary),
-                  ),
-                  Text(
-                    'Total Cost: Rs ${double.parse(widget.car.price.toString()) * _endDate!.difference(_startDate!).inDays}',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: ColorManager.tertiary),
+                  Icon(
+                    Iconsax.star1,
+                    size: 18,
+                    color: Colors.yellow.shade700,
                   ),
                 ],
-              ],
-            ),
-
-            const SizedBox(height: 10),
-            //************************* Confirm Booking button *************************//
-            InkWell(
-              onTap: (_startDate != null &&
-                      _endDate != null &&
-                      widget.car.isAvailable)
-                  ? () {
-                      if (userId != null) {
-                        final formattedStart =
-                            DateFormat('yyyy-MM-dd').format(_startDate!);
-                        final formattedEnd =
-                            DateFormat('yyyy-MM-dd').format(_endDate!);
-
-                        debugPrint("-----------------------------------------");
-                        debugPrint("Car ID : ${widget.car.id.toString()}");
-                        debugPrint("User ID : ${userId.toString()}");
-                        debugPrint("start date : $formattedStart");
-                        debugPrint("end date : $formattedEnd");
-                        debugPrint("-----------------------------------------");
-
-                        onButtonPressed(
-                          context,
-                          carId: widget.car.id,
-                          userId: userId!,
-                          startDate: formattedStart,
-                          endDate: formattedEnd,
-                        );
-                      }
-                    }
-                  : null,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                width: double.infinity,
-                height: 55,
-                decoration: BoxDecoration(
-                  color: (_startDate != null && _endDate != null)
-                      ? ColorManager.secondary
-                      : Colors.red,
-                  // Disabled state
-                  borderRadius: BorderRadius.circular(10),
+              ),
+              //************************* Description text *************************//
+              const SizedBox(height: 10),
+              Text(
+                'Description',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: ColorManager.tertiary,
+                  fontWeight: FontWeight.w400,
                 ),
-                child: Center(
-                  child: Text(
-                    (_startDate != null && _endDate != null)
-                        ? "Confirm Booking"
-                        : "Select Dates",
-                    style: TextStyle(
-                      color: (_startDate != null && _endDate != null)
-                          ? Colors.black
-                          : Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                widget.car.description,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: ColorManager.primary,
+                ),
+              ),
+              const SizedBox(height: 30),
+              //************************* Start date and End date button row *************************//
+              Row(
+                children: [
+                  // Start Date Button
+                  Expanded(
+                    child: InkWell(
+                      onTap: _pickStartDate,
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: _startDate == null
+                              ? Colors.red
+                              : ColorManager.secondary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            _startDate != null
+                                ? DateFormat('dd/MM/yyyy').format(_startDate!)
+                                : "Start Date",
+                            style: TextStyle(
+                              color: _startDate != null
+                                  ? Colors.black
+                                  : Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  // End Date Button
+                  Expanded(
+                    child: InkWell(
+                      onTap: _startDate != null ? _pickEndDate : null,
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: _endDate != null
+                              ? ColorManager.secondary
+                              : Colors.red,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            _endDate != null
+                                ? DateFormat('dd/MM/yyyy').format(_endDate!)
+                                : "End Date",
+                            style: TextStyle(
+                              color:
+                                  _endDate != null ? Colors.black : Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              //************************* Total date selected and also the price *************************//
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (_startDate != null && _endDate != null) ...[
+                    Text(
+                      'Total Days: ${_endDate!.difference(_startDate!).inDays}',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: ColorManager.tertiary),
+                    ),
+                    Text(
+                      'Total Cost: Rs ${double.parse(widget.car.price.toString()) * _endDate!.difference(_startDate!).inDays}',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: ColorManager.tertiary),
+                    ),
+                  ],
+                ],
+              ),
+        
+              const SizedBox(height: 10),
+              //************************* Confirm Booking button *************************//
+              InkWell(
+                onTap: (_startDate != null &&
+                        _endDate != null &&
+                        widget.car.isAvailable)
+                    ? () {
+                        if (userId != null) {
+                          final formattedStart =
+                              DateFormat('yyyy-MM-dd').format(_startDate!);
+                          final formattedEnd =
+                              DateFormat('yyyy-MM-dd').format(_endDate!);
+        
+                          debugPrint("-----------------------------------------");
+                          debugPrint("Car ID : ${widget.car.id.toString()}");
+                          debugPrint("User ID : ${userId.toString()}");
+                          debugPrint("start date : $formattedStart");
+                          debugPrint("end date : $formattedEnd");
+                          debugPrint("-----------------------------------------");
+        
+                          onButtonPressed(
+                            context,
+                            carId: widget.car.id,
+                            userId: userId!,
+                            startDate: formattedStart,
+                            endDate: formattedEnd,
+                          );
+                        }
+                      }
+                    : null,
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  width: double.infinity,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    color: (_startDate != null && _endDate != null)
+                        ? ColorManager.secondary
+                        : Colors.red,
+                    // Disabled state
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text(
+                      (_startDate != null && _endDate != null)
+                          ? "Confirm Booking"
+                          : "Select Dates",
+                      style: TextStyle(
+                        color: (_startDate != null && _endDate != null)
+                            ? Colors.black
+                            : Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
