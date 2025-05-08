@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:rentyne/resources/asset_data.dart';
 import 'package:rentyne/resources/url_paths.dart';
 import 'package:video_player/video_player.dart';
 import 'package:iconsax/iconsax.dart';
@@ -17,27 +21,39 @@ class CarDetailsScreen extends StatefulWidget {
 
 class _CarDetailsScreenState extends State<CarDetailsScreen> {
   late VideoPlayerController _controller;
+  late String randomSoundText;
+  final Random random = Random();
+  late Timer _timer;
 
   @override
   void initState() {
     super.initState();
     _initializeVideo();
+
+    randomSoundText = carSounds[random.nextInt(carSounds.length)];
+
+    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      setState(() {
+        randomSoundText = carSounds[random.nextInt(carSounds.length)];
+      });
+    });
   }
 
   // Initialize the video
   void _initializeVideo() {
-    _controller =
-        VideoPlayerController.networkUrl(Uri.parse("${AppUrl.googleLink}${widget.car.videoUrl}"))
-          ..initialize().then((_) {
-            setState(() {});
-            _controller.setVolume(0);
-            _controller.play();
-            _controller.setLooping(true);
-          });
+    _controller = VideoPlayerController.networkUrl(
+        Uri.parse("${AppUrl.googleLink}${widget.car.videoUrl}"))
+      ..initialize().then((_) {
+        setState(() {});
+        _controller.setVolume(0);
+        _controller.play();
+        _controller.setLooping(true);
+      });
   }
 
   @override
   void dispose() {
+    _timer.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -165,17 +181,35 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                 ),
               ],
             )
+          //******************* Loading animation and text *******************//
           : Container(
-                key: const ValueKey(1),
-                color: Colors.black.withOpacity(0.9),
-                child: Center(
-                  child: Lottie.asset(
+              width: double.infinity,
+              key: const ValueKey(1),
+              color: Colors.black.withOpacity(0.9),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset(
                     AnimationAssets.loading,
                     width: 200,
                     height: 200,
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Text(
+                      randomSoundText,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontFamily: 'ComicNeue',
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
               ),
+            ),
     );
   }
 }
