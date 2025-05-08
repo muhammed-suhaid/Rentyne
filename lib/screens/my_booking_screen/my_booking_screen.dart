@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rentyne/model/my_booking_model.dart';
 import 'package:rentyne/resources/color_manager.dart';
 import 'package:rentyne/resources/url_paths.dart';
+import 'package:rentyne/services/delete_booking.dart';
 import 'package:rentyne/services/my_booking_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,7 +40,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-            //error
+          //error
           : _errorMessage != null
               ? Center(
                   child: Text(
@@ -51,7 +52,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
                     textAlign: TextAlign.center,
                   ),
                 )
-                //booking is empty
+              //booking is empty
               : _bookings.isEmpty
                   ? Center(
                       child: Text(
@@ -144,6 +145,27 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+                              const SizedBox(height: 12),
+                              //************************* Delete Button ********************//
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton.icon(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red[700],
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  onPressed: () =>
+                                      _showDeleteConfirmationDialog(booking.id),
+                                  icon: const Icon(Icons.delete,
+                                      color: Colors.white),
+                                  label: const Text(
+                                    'Cancel Booking',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         );
@@ -178,4 +200,94 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
       });
     }
   }
+
+  //************************* Cancel Booking Confirmation method ********************//
+
+  void _showDeleteConfirmationDialog(int bookingId) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[900],
+        title: const Text(
+          'Cancel Booking',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: const Text(
+          'Are you sure you want to cancel this booking?',
+          style: TextStyle(color: Colors.white70),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('No', style: TextStyle(color: Colors.white)),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _cancelBooking(context, bookingId);
+            },
+            child: const Text('Yes', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+  }
+
+//************************* Cancel Booking Method ********************//
+
+  Future<void> _cancelBooking(BuildContext context, int bookingId) async {
+  setState(() {
+    _isLoading = true;
+  });
+
+  deleteBooking(bookingId).then((response) {
+    debugPrint("Booking id : $bookingId");
+
+    if (response is Map && response['success'] == true) {
+      // if (mounted) {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       content: Text('Booking cancelled successfully'),
+      //       backgroundColor: Colors.green,
+      //       duration: Duration(seconds: 2),
+      //       behavior: SnackBarBehavior.floating,
+      //     ),
+      //   );
+      // }
+
+      debugPrint("Booking cancelled successfully");
+      _fetchBookings();
+    } else {
+      // if (mounted) {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       content: Text("Failed to cancel booking"),
+      //       backgroundColor: Colors.red,
+      //       behavior: SnackBarBehavior.floating,
+      //     ),
+      //   );
+      // }
+
+      debugPrint("Failed to cancel booking");
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }).catchError((error) {
+    // if (mounted) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(
+    //       content: Text('An error occurred: $error'),
+    //       backgroundColor: Colors.red,
+    //       behavior: SnackBarBehavior.floating,
+    //     ),
+    //   );
+    // }
+    debugPrint("An error occurred");
+    setState(() {
+      _isLoading = false;
+    });
+  });
+}
+
 }
